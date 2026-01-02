@@ -43,9 +43,9 @@ export function buildRpcAuth(session: ConnectionSession, auth: AnyAuth): Record<
         throw new SurrealError("Database authentication requires a namespace to be provided");
     }
 
-    if (access) result.ac = access;
-    if (namespace) result.ns = namespace;
-    if (database) result.db = database;
+    if (access) result["ac"] = access;
+    if (namespace) result["ns"] = namespace;
+    if (database) result["db"] = database;
 
     return result;
 }
