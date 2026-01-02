@@ -31,7 +31,7 @@ export async function fetchSurreal(
     }
 
     if (session.accessToken) {
-        headerMap.Authorization = `Bearer ${session.accessToken}`;
+        headerMap["Authorization"] = `Bearer ${session.accessToken}`;
     }
 
     endpoint.protocol = endpoint.protocol.replace("ws", "http");
