@@ -280,12 +280,12 @@ export class WebSocketEngine extends RpcEngine implements SurrealEngine {
             return;
         }
 
-        if (isLiveMessage(res.result)) {
-            this.#subscriptions.publish(res.result.id.toString(), {
-                queryId: res.result.id,
-                action: res.result.action,
-                recordId: res.result.record,
-                value: res.result.result,
+        if (isLiveMessage(res["result"])) {
+            this.#subscriptions.publish(res["result"].id.toString(), {
+                queryId: res["result"].id,
+                action: res["result"].action,
+                recordId: res["result"].record,
+                value: res["result"].result,
             });
             return;
         }
