@@ -523,11 +523,11 @@ export class ConnectionController implements SurrealProtocol, EventPublisher<Con
         // Schedule token renewal
         const payload = fastParseJwt(tokens.access);
 
-        if (!payload || !payload.exp) return;
+        if (!payload || !payload["exp"]) return;
 
         // Renew 60 seconds before expiry
         const now = Math.floor(Date.now() / 1000);
-        const delay = Math.max((payload.exp - now - 60) * 1000, 0);
+        const delay = Math.max((payload["exp"] - now - 60) * 1000, 0);
 
         sessionState.authRenewal = setTimeout(() => {
             this.#applyAuthentication(session).catch((err) => {
@@ -559,9 +559,9 @@ export class ConnectionController implements SurrealProtocol, EventPublisher<Con
         if (sessionState.accessToken) {
             const payload = fastParseJwt(sessionState.accessToken);
 
-            if (payload?.exp) {
+            if (payload?.["exp"]) {
                 const now = Math.floor(Date.now() / 1000);
-                const isValid = payload.exp - now > 60;
+                const isValid = payload["exp"] - now > 60;
 
                 if (isValid) {
                     try {
